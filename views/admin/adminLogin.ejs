@@ -1,0 +1,105 @@
+<%-include('../layouts/header.ejs')-%>
+
+<section class="background-gradient overflow-hidden">
+    <style>
+      .background-gradient {
+        background: linear-gradient(135deg, #af4c6b 10%, #64f321 100%);
+        height: 100vh;
+      }
+  
+      .container {
+        min-height: 100vh;
+        padding-top: 50px; 
+      }
+  
+      #radius-shape-1 {
+        height: 220px;
+        width: 220px;
+        top: -60px;
+        left: -130px;
+        background: radial-gradient(#FFD700, #FF6347);
+        overflow: hidden;
+      }
+  
+      #radius-shape-2 {
+        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        bottom: -60px;
+        right: -110px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(#FF6347, #00CED1);
+        overflow: hidden;
+      }
+  
+      .bg-glass {
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        backdrop-filter: saturate(180%) blur(20px);
+      }
+  
+      h1, p, label {
+        color: #333333; 
+      }
+  
+      .btn-primary {
+        background-color: #FF6347; 
+        color: #ffffff; 
+      }
+    </style>
+  
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight">
+            Welcome to Our Website<br />
+            <span>Your Success Starts Here</span>
+          </h1>
+          <p class="mb-4 opacity-70">
+            Explore the possibilities and unlock your potential with our services.
+          </p>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative mt-5 pt-2">
+          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+
+
+                <form action="" method="post" >
+
+
+                <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">ADMIN LOGIN</h4>
+  
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Email address</label>
+                  <input type="email" id="form3Example3" name="email" class="form-control" placeholder="Enter Email"/>
+                </div>
+  
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <input type="password" id="form3Example4" name="password" class="form-control" placeholder="Enter password" />
+                </div>
+  
+                
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="submit" value="Login" class="btn btn-primary btn-lg" 
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                    <p class="small fw-bold mt-2 pt-1 mb-0">your not an admin? <a href="/"
+                      class="link-danger">Login</a></p>
+
+              </form>
+              <% if(typeof message !== 'undefined'){
+                %>
+                <p style="color: red;"><%= message %></p>
+                <%
+              }
+              %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%-include('../layouts/footer.ejs')-%>

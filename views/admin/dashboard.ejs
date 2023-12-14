@@ -1,0 +1,114 @@
+<%-include('../layouts/header.ejs')-%>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+      <a class="navbar-brand mx-auto  " id="sahal" href="#">Admin </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-dark rounded-pill me-4" href="/admin/logout" id="loggo">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+   
+  </nav>
+  <div class="d-flex align-items-center justify-content-center my-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search by Name,email,mobile" style="width: 300px;">
+  </div>
+
+
+                  <div class="container">
+                    <div class="row my-4">
+                      <div class="col-lg-12">
+                        <div class="table-responsive">
+                          <table id="userTable" class="table table-striped text-center t-1 tab">
+                            <thead>
+                              <tr class="table-dark">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>verification</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% if (users.length > 0) { 
+                                for (let i = 0; i < users.length; i++) { %>
+                                  <tr>
+                                    <td><%= i + 1 %></td>
+                                    <td><%= users[i].name %></td>
+                                    <td><%= users[i].email %></td>
+                                    <td><%= users[i].mobile %></td>
+                                    <td>
+                                      <%
+                                      if(users[i].is_verified == 0){
+                                        %>
+                                        <p>Not Verified</p>
+                                        <%
+                                      }else{
+                                        %>
+                                        <p>Verified</p>
+                                        <%
+                                      }
+                                      %>
+                                    </td>
+                                      <td>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="/admin/edit-user?_id=<%= users[i]._id%>" class="btn btn-primary">Edit</a>
+                                            <a href="/admin/delete-user?_id=<%= users[i]._id%>" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </td>
+                                  </tr>
+                                <% } %>
+                              <% } else { %>
+                                <tr>
+                                  <td colspan="5">No users available</td>
+                                </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="d-flex align-items-center justify-content-center">
+                    <a class="btn btn-dark rounded-pill me-4 pt-3 pb-3 ps-3" href="/admin/new-user" id="loggo" style="letter-spacing: 3px; padding-right: 20px; padding-left: 20px;">Add New User</a>
+                </div>
+                
+                
+
+  <%-include('../layouts/footer.ejs')-%>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keyup', function () {
+        let searchTerm = searchInput.value.toLowerCase();
+        let tableRows = document.querySelectorAll('#userTable tbody tr');
+
+        tableRows.forEach(function (row) {
+            let nameColumn = row.querySelector('td:nth-child(2)'); // Name index
+            let emailColumn = row.querySelector('td:nth-child(3)'); // Email index
+            let mobileColumn = row.querySelector('td:nth-child(4)'); // Mobile index
+
+            if (nameColumn && emailColumn && mobileColumn) {
+                let nameText = nameColumn.textContent.toLowerCase();
+                let emailText = emailColumn.textContent.toLowerCase();
+                let mobileText = mobileColumn.textContent.toLowerCase();
+
+                // Check if any of the columns contain the search term
+                if (nameText.includes(searchTerm) || emailText.includes(searchTerm) || mobileText.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    });
+});
+
+
+  </script>
